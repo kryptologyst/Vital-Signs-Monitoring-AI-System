@@ -1,0 +1,66 @@
+# Default configuration for vital signs monitoring
+defaults:
+  - _self_
+
+# Model configuration
+model:
+  name: "cnn"  # Options: cnn, lstm, transformer, ensemble
+  params:
+    dropout_rate: 0.2
+    hidden_size: 128  # For LSTM
+    num_layers: 2     # For LSTM/Transformer
+    d_model: 128      # For Transformer
+    nhead: 8          # For Transformer
+
+# Data configuration
+data:
+  n_normal_samples: 1000
+  n_anomalous_samples: 300
+  sequence_length: 100
+  sampling_rate: 1.0
+  anomaly_types:
+    - "tachycardia"
+    - "hypothermia"
+    - "hypoxemia"
+
+# Training configuration
+training:
+  batch_size: 32
+  num_epochs: 100
+  learning_rate: 0.001
+  optimizer: "adam"
+  weight_decay: 1e-4
+  grad_clip: 1.0
+  early_stopping_patience: 10
+  loss: "cross_entropy"  # Options: cross_entropy, focal, tversky
+  focal_alpha: 1.0
+  focal_gamma: 2.0
+
+# Evaluation configuration
+evaluation:
+  metrics:
+    - "accuracy"
+    - "precision"
+    - "recall"
+    - "f1"
+    - "roc_auc"
+    - "pr_auc"
+  calibration:
+    n_bins: 10
+  uncertainty:
+    num_samples: 50
+
+# Logging configuration
+logging:
+  level: "INFO"
+  log_file: "logs/training.log"
+
+# Output configuration
+output:
+  save_dir: "outputs"
+  save_predictions: true
+  save_explanations: true
+  num_explanations: 10
+
+# Random seed
+seed: 42

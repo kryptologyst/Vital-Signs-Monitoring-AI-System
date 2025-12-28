@@ -1,0 +1,15 @@
+# LSTM model configuration
+defaults:
+  - default
+
+model:
+  name: "lstm"
+  params:
+    hidden_size: 128
+    num_layers: 2
+    dropout_rate: 0.2
+    bidirectional: true
+
+training:
+  learning_rate: 0.001
+  batch_size: 16

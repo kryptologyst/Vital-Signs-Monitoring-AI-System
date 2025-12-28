@@ -1,0 +1,9 @@
+# CNN model configuration
+defaults:
+  - default
+
+model:
+  name: "cnn"
+  params:
+    dropout_rate: 0.3
+    sequence_length: 100
